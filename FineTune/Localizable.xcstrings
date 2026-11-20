@@ -1453,24 +1453,24 @@
         }
       }
     },
-    "In exclusive use by %@ (PID %d)": {
+    "In exclusive use by %@ (PID %@)": {
       "extractionState": "manual",
       "localizations": {
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "正由 %@ 独占使用（PID %d）"
+            "value": "正由 %@ 独占使用（PID %@）"
           }
         }
       }
     },
-    "In exclusive use by PID %d": {
+    "In exclusive use by PID %@": {
       "extractionState": "manual",
       "localizations": {
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "正由 PID %d 独占使用"
+            "value": "正由 PID %@ 独占使用"
           }
         }
       }

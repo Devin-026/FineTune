@@ -4,6 +4,8 @@ import json
 from collections import Counter
 from pathlib import Path
 import re
+import subprocess
+import tempfile
 
 ROOT = Path(__file__).resolve().parents[1]
 FORMAT = re.compile(r'%(?:\d+\$)?(?:[-+ #0]*\d*(?:\.\d+)?)?(?:ll|l|h|hh|z)?[@diuoxXfFeEgGcs]')
@@ -31,6 +33,15 @@ def validate():
     assert all(f'<key>{key}</key>' in info for key in permission_keys)
     project = (ROOT / 'FineTune.xcodeproj/project.pbxproj').read_text()
     assert '"zh-Hans"' in project
+    catalog = json.loads((ROOT / 'FineTune/Localizable.xcstrings').read_text())
+    with tempfile.TemporaryDirectory(prefix='finetune-localization-') as folder:
+        bundle = Path(folder) / 'Check.bundle' / 'zh-Hans.lproj'
+        bundle.mkdir(parents=True)
+        lines = [json.dumps(key, ensure_ascii=False) + ' = ' +
+                 json.dumps(data['localizations']['zh-Hans']['stringUnit']['value'], ensure_ascii=False) + ';'
+                 for key, data in catalog['strings'].items()]
+        (bundle / 'Localizable.strings').write_text('\n'.join(lines))
+        subprocess.run(['swift', str(ROOT / 'scripts/check_localization.swift'), str(bundle)], check=True)
     print(f'Validated {count} Simplified Chinese translations, format arguments, and permission prompts.')
 
 
