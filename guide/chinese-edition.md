@@ -4,7 +4,7 @@
 
 ## 使用
 
-- 要求 macOS 15 或更新系统，支持 Apple 芯片和 Intel。
+- 要求 macOS 15.4 或更新系统，支持 Apple 芯片和 Intel。
 - 在本仓库 Actions 的成功 CI 运行中下载 `FineTune-Chinese` 构建产物，解压内层 `FineTune-Chinese.zip` 后，将 `FineTune.app` 放入“应用程序”。它与官方版使用相同应用标识，请先退出官方版。
 - 首次启动按系统提示授予“屏幕与系统音频录制”权限；只有需要媒体键功能时才授予辅助功能权限。
 - 中文系统自动显示简体中文。也可在“设置 → 通用 → 界面语言”选择简体中文、English 或跟随 macOS，退出并重新启动后生效。语言偏好仅作用于 FineTune。
