@@ -10,6 +10,10 @@ final class UpdateManager: NSObject, ObservableObject {
 
     @Published var canCheckForUpdates = false
 
+    /// This community fork has no signed Sparkle feed yet. Never replace it
+    /// with an upstream binary, which would remove its Chinese localization.
+    let usesCommunityReleases = true
+
     override init() {
         // Create the updater controller without auto-starting (prevents popup on launch)
         updaterController = SPUStandardUpdaterController(
@@ -18,6 +22,8 @@ final class UpdateManager: NSObject, ObservableObject {
             userDriverDelegate: nil
         )
         super.init()
+
+        guard !usesCommunityReleases else { return }
 
         // Start updater to enable manual checks, but don't trigger auto-check UI
         try? updaterController.updater.start()

@@ -229,7 +229,7 @@ final class AudioProcessMonitor: AudioProcessMonitoring {
                 // Use resolved app's info, fall back to Core Audio bundle ID
                 let name = resolvedApp?.localizedName
                     ?? objectID.readProcessBundleID()?.components(separatedBy: ".").last
-                    ?? "Unknown"
+                    ?? String(localized: "Unknown")
                 let icon = resolvedApp?.icon
                     ?? NSImage(systemSymbolName: "app.fill", accessibilityDescription: nil)
                     ?? NSImage()

@@ -17,8 +17,8 @@ enum EQPickerSection: Identifiable, Hashable {
 
     var title: String {
         switch self {
-        case .myPresets: return "My Presets"
-        case .builtIn(let cat): return cat.rawValue
+        case .myPresets: return String(localized: "My Presets")
+        case .builtIn(let cat): return cat.displayName
         }
     }
 }
@@ -98,7 +98,7 @@ struct EQPresetPicker: View {
             popoverWidth: 170,
             onSelect: handleSelect
         ) { selected in
-            Text(selected?.name ?? "Custom")
+            Text(selected?.name ?? String(localized: "Custom"))
         } itemContent: { item, isSelected in
             if item.isUserPreset {
                 UserPresetItemView(
@@ -162,8 +162,8 @@ private struct UserPresetItemView: View {
                         .foregroundStyle(isHovered ? DesignTokens.Colors.interactiveHover : .clear)
                 }
                 .buttonStyle(.plain)
-                .accessibilityLabel("Delete preset \(item.name)")
-                .help("Delete preset")
+                .accessibilityLabel(String(localized: "Delete preset \(item.name)"))
+                .help(String(localized: "Delete preset"))
             }
         }
         .whenHovered { isHovered = $0 }

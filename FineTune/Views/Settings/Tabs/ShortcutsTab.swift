@@ -30,10 +30,10 @@ struct ShortcutsTab: View {
     // MARK: - Volume
 
     private var volumeSection: some View {
-        SettingsSection("Volume") {
+        SettingsSection(String(localized: "Volume")) {
             SettingsRow(
-                "Volume Step",
-                description: "How much each keypress changes the volume. Applies to media keys, configured hotkeys, and arrow-key nav in the popup."
+                String(localized: "Volume Step"),
+                description: String(localized: "How much each keypress changes the volume. Applies to media keys, configured hotkeys, and arrow-key nav in the popup.")
             ) {
                 Picker("", selection: $settings.appSettings.volumeHotkeyStep) {
                     ForEach(VolumeHotkeyStep.allCases) { step in
@@ -50,10 +50,10 @@ struct ShortcutsTab: View {
     // MARK: - Media Keys
 
     private var mediaKeysSection: some View {
-        SettingsSection("Media Keys") {
+        SettingsSection(String(localized: "Media Keys")) {
             SettingsRow(
-                "Media Keys Control",
-                description: "Use F11/F12 (or volume keys) to control FineTune"
+                String(localized: "Media Keys Control"),
+                description: String(localized: "Use F11/F12 (or volume keys) to control FineTune")
             ) {
                 Toggle("", isOn: $settings.appSettings.mediaKeyControlEnabled)
                     .toggleStyle(.switch)
@@ -80,8 +80,8 @@ struct ShortcutsTab: View {
             if settings.appSettings.mediaKeyControlEnabled && accessibility.isTrustedCached {
                 SettingsRowDivider()
                 SettingsRow(
-                    "HUD Style",
-                    description: "How the volume indicator appears"
+                    String(localized: "HUD Style"),
+                    description: String(localized: "How the volume indicator appears")
                 ) {
                     HUDStyleSegmentedControl(selection: $settings.appSettings.hudStyle)
                 }
@@ -92,7 +92,7 @@ struct ShortcutsTab: View {
     // MARK: - Hotkeys
 
     private var hotkeysSection: some View {
-        SettingsSection("Hotkeys") {
+        SettingsSection(String(localized: "Hotkeys")) {
             ForEach(Array(ShortcutAction.allCases.enumerated()), id: \.element) { index, action in
                 if index > 0 { SettingsRowDivider() }
                 SettingsRow(
@@ -110,10 +110,10 @@ struct ShortcutsTab: View {
 
     private func description(for action: ShortcutAction) -> String {
         switch action {
-        case .togglePopup: "Show or hide the menu bar popup"
-        case .targetAppVolumeUp: "Raise volume for the app playing audio"
-        case .targetAppVolumeDown: "Lower volume for the app playing audio"
-        case .targetAppMuteToggle: "Mute or unmute the app playing audio"
+        case .togglePopup: String(localized: "Show or hide the menu bar popup")
+        case .targetAppVolumeUp: String(localized: "Raise volume for the app playing audio")
+        case .targetAppVolumeDown: String(localized: "Lower volume for the app playing audio")
+        case .targetAppMuteToggle: String(localized: "Mute or unmute the app playing audio")
         }
     }
 }

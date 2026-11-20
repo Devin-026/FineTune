@@ -744,7 +744,7 @@ final class SettingsManager {
     @discardableResult
     func createUserPreset(name: String, settings eqSettings: EQSettings) -> UserEQPreset {
         let trimmed = name.trimmingCharacters(in: .whitespacesAndNewlines)
-        let baseName = trimmed.isEmpty ? "Untitled" : trimmed
+        let baseName = trimmed.isEmpty ? String(localized: "Untitled") : trimmed
         let finalName = uniquePresetName(baseName)
         let preset = UserEQPreset(name: finalName, settings: eqSettings)
         settings.userEQPresets.append(preset)

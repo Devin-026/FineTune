@@ -20,8 +20,8 @@ struct MuteButton: View {
             mutedIcon: "speaker.slash.fill",
             unmutedIcon: VolumeBucket.bucket(for: Float(levelFraction)).symbolName,
             layoutReferenceIcon: "speaker.wave.3.fill",
-            mutedHelp: "Unmute",
-            unmutedHelp: "Mute",
+            mutedHelp: String(localized: "Unmute"),
+            unmutedHelp: String(localized: "Mute"),
             action: action
         )
     }
@@ -39,8 +39,8 @@ struct InputMuteButton: View {
             mutedIcon: "mic.slash.fill",
             unmutedIcon: "mic.fill",
             layoutReferenceIcon: nil,
-            mutedHelp: "Unmute microphone",
-            unmutedHelp: "Mute microphone",
+            mutedHelp: String(localized: "Unmute microphone"),
+            unmutedHelp: String(localized: "Mute microphone"),
             action: action
         )
     }

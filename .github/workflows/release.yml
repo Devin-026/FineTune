@@ -7,6 +7,8 @@ on:
 
 jobs:
   build:
+    # The upstream release job requires the original author's private signing keys.
+    if: github.repository == 'ronitsingh10/FineTune'
     runs-on: macos-26
     permissions:
       contents: write

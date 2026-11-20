@@ -92,7 +92,7 @@ struct EditablePercentage: View {
         .contentShape(Rectangle())
         .onTapGesture { if !isEditing { startEditing() } }
         .accessibilityAddTraits(.isButton)
-        .accessibilityLabel("Edit volume percentage")
+        .accessibilityLabel(String(localized: "Edit volume percentage"))
         .onHover { hovering in
             isHovered = hovering
             if hovering {

@@ -1,3 +1,8 @@
+> **FineTune 简体中文社区维护版**：基于 [Ronit Singh 原项目](https://github.com/ronitsingh10/FineTune)，由 [Devin-026/FineTune](https://github.com/Devin-026/FineTune) 维护。保留原作者署名、捐赠入口和 GPLv3 许可。
+> 已加入中文界面、英文回退、界面语言选择和中文权限提示。安装、验证与同步原版的方法见 [汉化版说明](guide/chinese-edition.md)。
+> 在 [Actions](https://github.com/Devin-026/FineTune/actions/workflows/ci.yml) 下载 **FineTune-Chinese** 构建产物。这些社区构建采用本地临时签名，尚无 Apple 公证；后续发布版本请查看本仓库的 [Releases](https://github.com/Devin-026/FineTune/releases)。
+> 下方原版安装说明予以保留；Homebrew 安装的仍是官方英文版。
+
 <img src="assets/icon.png" width="170" height="170" alt="FineTune 应用图标" align="left"/>
 
 <h3>FineTune</h3>

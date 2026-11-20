@@ -18,13 +18,13 @@ struct MediaKeyOfflineCard: View {
 
             VStack(alignment: .leading, spacing: DesignTokens.Spacing.xs) {
                 HStack(alignment: .firstTextBaseline, spacing: DesignTokens.Spacing.xs) {
-                    Text("Media keys offline")
+                    Text(String(localized: "Media keys offline"))
                         .font(DesignTokens.Typography.rowNameBold)
                         .foregroundStyle(DesignTokens.Colors.textPrimary)
                     Spacer(minLength: DesignTokens.Spacing.xs)
                 }
 
-                Text("The system disabled FineTune's event tap — usually after a sleep/wake cycle or a main-thread stall. Retry to reinstall it.")
+                Text(String(localized: "The system disabled FineTune's event tap — usually after a sleep/wake cycle or a main-thread stall. Retry to reinstall it."))
                     .font(DesignTokens.Typography.caption)
                     .foregroundStyle(DesignTokens.Colors.textTertiary)
                     .fixedSize(horizontal: false, vertical: true)
@@ -33,7 +33,7 @@ struct MediaKeyOfflineCard: View {
                     HStack(spacing: DesignTokens.Spacing.xs) {
                         Image(systemName: "arrow.clockwise")
                             .font(.system(size: 10, weight: .medium))
-                        Text("Retry")
+                        Text(String(localized: "Retry"))
                     }
                     .font(DesignTokens.Typography.pickerText)
                     .foregroundStyle(DesignTokens.Colors.textPrimary)
@@ -41,7 +41,7 @@ struct MediaKeyOfflineCard: View {
                 .buttonStyle(.plain)
                 .glassButtonStyle()
                 .padding(.top, 2)
-                .accessibilityHint("Reinstalls the media-key event tap.")
+                .accessibilityHint(String(localized: "Reinstalls the media-key event tap."))
             }
         }
         .padding(.horizontal, DesignTokens.Spacing.sm)
@@ -56,7 +56,7 @@ struct MediaKeyOfflineCard: View {
                 .allowsHitTesting(false)
         }
         .accessibilityElement(children: .combine)
-        .accessibilityLabel("Media keys offline. Retry to reinstall the event tap.")
+        .accessibilityLabel(String(localized: "Media keys offline. Retry to reinstall the event tap."))
     }
 }
 

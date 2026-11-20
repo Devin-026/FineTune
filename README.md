@@ -1,3 +1,8 @@
+> **Simplified Chinese community edition** maintained at [Devin-026/FineTune](https://github.com/Devin-026/FineTune), based on [Ronit Singh’s original project](https://github.com/ronitsingh10/FineTune). Original author credits, donation links and GPLv3 are preserved.
+> Chinese UI, English fallback, app language picker, and localized permission prompts are included. See [汉化版说明](guide/chinese-edition.md) for installation, validation and upstream syncing.
+> Builds are available as **FineTune-Chinese** artifacts in [Actions](https://github.com/Devin-026/FineTune/actions/workflows/ci.yml); these are community builds with an ad-hoc signature, without Apple notarization. Download future published versions from this fork’s [Releases](https://github.com/Devin-026/FineTune/releases).
+> The original installation instructions below describe the upstream release; Homebrew installs the original English version.
+
 <img src="assets/icon.png" width="170" height="170" alt="FineTune app icon" align="left"/>
 
 <h3>FineTune</h3>

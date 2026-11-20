@@ -41,7 +41,7 @@ struct AccessibilityPromptStrip: View {
             } else {
                 Button(action: { accessibility.requestAccess() }) {
                     HStack(spacing: 3) {
-                        Text("Grant")
+                        Text(String(localized: "Grant"))
                         Image(systemName: "arrow.up.right.square")
                             .font(.system(size: 9, weight: .medium))
                     }
@@ -49,7 +49,7 @@ struct AccessibilityPromptStrip: View {
                     .foregroundStyle(DesignTokens.Colors.accentPrimary)
                 }
                 .buttonStyle(.plain)
-                .accessibilityHint("Registers FineTune in the Accessibility list and opens System Settings.")
+                .accessibilityHint(String(localized: "Registers FineTune in the Accessibility list and opens System Settings."))
             }
         }
         .padding(.horizontal, DesignTokens.Spacing.md)
@@ -70,7 +70,7 @@ struct AccessibilityPromptStrip: View {
             Circle()
                 .fill(DesignTokens.Colors.vuGreen)
                 .frame(width: 5, height: 5)
-            Text("Granted")
+            Text(String(localized: "Granted"))
                 .font(.system(size: 9, weight: .semibold))
                 .foregroundStyle(DesignTokens.Colors.textSecondary)
         }
@@ -85,8 +85,8 @@ struct AccessibilityPromptStrip: View {
 
     private var message: String {
         showingGrantedFlourish
-            ? "Access granted — volume keys now control FineTune."
-            : "FineTune needs Accessibility to intercept F10 / F11 / F12."
+            ? String(localized: "Access granted — volume keys now control FineTune.")
+            : String(localized: "FineTune needs Accessibility to intercept F10 / F11 / F12.")
     }
 
     private func triggerGrantedFlourish() {

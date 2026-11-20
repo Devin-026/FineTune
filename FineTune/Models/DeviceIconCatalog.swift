@@ -13,6 +13,17 @@ enum DeviceIconCatalog {
         let name: String
         let entries: [Entry]
         var id: String { name }
+
+        var displayName: String {
+            switch name {
+            case "Headphones & Earbuds": return String(localized: "Headphones & Earbuds")
+            case "Speakers": return String(localized: "Speakers")
+            case "Computers & Displays": return String(localized: "Computers & Displays")
+            case "Microphones": return String(localized: "Microphones")
+            case "Connectors & Other": return String(localized: "Connectors & Other")
+            default: return name
+            }
+        }
     }
 
     static let categories: [Category] = [

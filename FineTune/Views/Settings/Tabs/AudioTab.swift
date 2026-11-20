@@ -51,10 +51,10 @@ struct AudioTab: View {
     // MARK: - Volume
 
     private var volumeSection: some View {
-        SettingsSection("Volume") {
+        SettingsSection(String(localized: "Volume")) {
             SettingsRow(
-                "Default Volume",
-                description: "Initial volume for new apps"
+                String(localized: "Default Volume"),
+                description: String(localized: "Initial volume for new apps")
             ) {
                 VolumeSlider(
                     $settings.appSettings.defaultNewAppVolume,
@@ -64,8 +64,8 @@ struct AudioTab: View {
             }
             SettingsRowDivider()
             SettingsRow(
-                "Loudness Compensation",
-                description: "Boost low frequencies at low volume"
+                String(localized: "Loudness Compensation"),
+                description: String(localized: "Boost low frequencies at low volume")
             ) {
                 Toggle("", isOn: unifiedLoudnessToggleBinding)
                     .toggleStyle(.switch)
@@ -78,10 +78,10 @@ struct AudioTab: View {
     // MARK: - Devices
 
     private var devicesSection: some View {
-        SettingsSection("Devices") {
+        SettingsSection(String(localized: "Devices")) {
             SettingsRow(
-                "Lock Input Device",
-                description: "Prevent auto-switching when devices connect"
+                String(localized: "Lock Input Device"),
+                description: String(localized: "Prevent auto-switching when devices connect")
             ) {
                 Toggle("", isOn: $settings.appSettings.lockInputDevice)
                     .toggleStyle(.switch)
@@ -90,8 +90,8 @@ struct AudioTab: View {
             }
             SettingsRowDivider()
             SettingsRow(
-                "System Sounds",
-                description: "Where alerts and effects play"
+                String(localized: "System Sounds"),
+                description: String(localized: "Where alerts and effects play")
             ) {
                 SystemSoundsDevicePicker(
                     devices: sortedOutputDevices,
@@ -111,8 +111,8 @@ struct AudioTab: View {
             }
             SettingsRowDivider()
             SettingsRow(
-                "Alert Volume",
-                description: "Volume for alerts and notifications"
+                String(localized: "Alert Volume"),
+                description: String(localized: "Volume for alerts and notifications")
             ) {
                 VolumeSlider(
                     Binding(

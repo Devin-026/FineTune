@@ -7,6 +7,7 @@ struct GeneralTab: View {
     let onResetAll: () -> Void
 
     @State private var showResetConfirmation = false
+    @AppStorage("interfaceLanguage") private var interfaceLanguage = "system"
 
     var body: some View {
         ScrollView {
@@ -21,24 +22,45 @@ struct GeneralTab: View {
         }
         .scrollIndicators(.never)
         .confirmationDialog(
-            "Reset all settings?",
+            String(localized: "Reset all settings?"),
             isPresented: $showResetConfirmation,
             titleVisibility: .visible
         ) {
-            Button("Reset", role: .destructive) { onResetAll() }
-            Button("Cancel", role: .cancel) {}
+            Button(String(localized: "Reset"), role: .destructive) { onResetAll() }
+            Button(String(localized: "Cancel"), role: .cancel) {}
         } message: {
-            Text("This cannot be undone.")
+            Text(String(localized: "This cannot be undone."))
         }
     }
 
     // MARK: - General
 
     private var generalSection: some View {
-        SettingsSection("General") {
+        SettingsSection(String(localized: "General")) {
             SettingsRow(
-                "Launch at Login",
-                description: "Start FineTune when you log in"
+                String(localized: "Language"),
+                description: String(localized: "Restart FineTune to apply the language change.")
+            ) {
+                Picker("", selection: $interfaceLanguage) {
+                    Text(String(localized: "Follow macOS")).tag("system")
+                    Text(verbatim: "简体中文").tag("zh-Hans")
+                    Text(verbatim: "English").tag("en")
+                }
+                .labelsHidden()
+                .frame(minWidth: 130)
+                .onChange(of: interfaceLanguage) { _, language in
+                    // AppleLanguages is app-scoped. Bundle language changes on next launch.
+                    if language == "system" {
+                        UserDefaults.standard.removeObject(forKey: "AppleLanguages")
+                    } else {
+                        UserDefaults.standard.set([language], forKey: "AppleLanguages")
+                    }
+                }
+            }
+            SettingsRowDivider()
+            SettingsRow(
+                String(localized: "Launch at Login"),
+                description: String(localized: "Start FineTune when you log in")
             ) {
                 Toggle("", isOn: $settings.appSettings.launchAtLogin)
                     .toggleStyle(.switch)
@@ -47,15 +69,15 @@ struct GeneralTab: View {
             }
             SettingsRowDivider()
             SettingsRow(
-                "Theme",
-                description: "Match macOS, or lock to Light or Dark"
+                String(localized: "Theme"),
+                description: String(localized: "Match macOS, or lock to Light or Dark")
             ) {
                 ThemeTilePicker(selection: $settings.appSettings.appearance)
             }
             SettingsRowDivider()
             SettingsRow(
-                "Device Disconnect Alerts",
-                description: "Show notification when an audio device disconnects"
+                String(localized: "Device Disconnect Alerts"),
+                description: String(localized: "Show notification when an audio device disconnects")
             ) {
                 Toggle("", isOn: $settings.appSettings.showDeviceDisconnectAlerts)
                     .toggleStyle(.switch)
@@ -68,17 +90,17 @@ struct GeneralTab: View {
     // MARK: - Menu Bar
 
     private var menuBarSection: some View {
-        SettingsSection("Menu Bar") {
+        SettingsSection(String(localized: "Menu Bar")) {
             SettingsRow(
-                "Icon Style",
-                description: "How FineTune appears in your menu bar"
+                String(localized: "Icon Style"),
+                description: String(localized: "How FineTune appears in your menu bar")
             ) {
                 IconStyleSegmentedControl(selection: $settings.appSettings.menuBarIconStyle)
             }
             SettingsRowDivider()
             SettingsRow(
-                "Popup Size",
-                description: "Smaller fits more on screen; larger leaves more breathing room."
+                String(localized: "Popup Size"),
+                description: String(localized: "Smaller fits more on screen; larger leaves more breathing room.")
             ) {
                 PopupSizeTilePicker(selection: $settings.appSettings.popupSize)
             }
@@ -88,15 +110,15 @@ struct GeneralTab: View {
     // MARK: - Data
 
     private var dataSection: some View {
-        SettingsSection("Data") {
+        SettingsSection(String(localized: "Data")) {
             SettingsRow(
-                "Reset All Settings",
-                description: "Clear all volumes, EQ, and device routings"
+                String(localized: "Reset All Settings"),
+                description: String(localized: "Clear all volumes, EQ, and device routings")
             ) {
                 Button(role: .destructive) {
                     showResetConfirmation = true
                 } label: {
-                    Text("Reset")
+                    Text(String(localized: "Reset"))
                 }
                 .buttonStyle(.bordered)
                 .tint(.red)

@@ -389,7 +389,7 @@ final class DDCController {
         }
 
         // No display name found in registry hierarchy
-        return "External Display"
+        return String(localized: "External Display")
     }
 
     private nonisolated static func displayNameFromEntry(_ entry: io_service_t) -> String? {

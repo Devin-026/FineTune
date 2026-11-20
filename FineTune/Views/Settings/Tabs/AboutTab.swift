@@ -32,7 +32,11 @@ struct AboutTab: View {
                     .font(.system(size: 22, weight: .semibold))
                     .foregroundStyle(DesignTokens.Colors.textPrimary)
 
-                Text("Version \(versionShort) (\(buildNumber))")
+                Text(String(localized: "Chinese Community Edition"))
+                    .font(.system(size: 12))
+                    .foregroundStyle(.secondary)
+
+                Text(String(localized: "Version \(versionShort) (\(buildNumber))"))
                     .font(.system(size: 12, design: .monospaced))
                     .foregroundStyle(.secondary)
             }
@@ -41,7 +45,7 @@ struct AboutTab: View {
 
             HStack(spacing: 8) {
                 AboutLinkChip(
-                    label: "Donate",
+                    label: String(localized: "Donate"),
                     icon: "heart.fill",
                     hoverIcon: "heart.fill",
                     hoverColor: .pink,
@@ -49,7 +53,7 @@ struct AboutTab: View {
                     isPrimary: true
                 )
                 AboutLinkChip(
-                    label: "Star on GitHub",
+                    label: String(localized: "Star on GitHub"),
                     icon: "star",
                     hoverIcon: "star.fill",
                     hoverColor: .yellow,

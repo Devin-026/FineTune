@@ -44,7 +44,7 @@ struct PairedDeviceRow: View {
                         minHeight: DesignTokens.Dimensions.minTouchTarget
                     )
             } else {
-                Button("Connect") {
+                Button(String(localized: "Connect")) {
                     onConnect()
                 }
                 .buttonStyle(.plain)

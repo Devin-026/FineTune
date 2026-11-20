@@ -26,12 +26,12 @@ struct DeviceInspectorInfoGrid: View {
         switch row {
         case .transport(let value):
             GridRow {
-                labelCell("Transport")
+                labelCell(String(localized: "Transport"))
                 valueCell(value)
             }
         case .sampleRate(let display, let isPicker, let options):
             GridRow {
-                labelCell("Sample rate")
+                labelCell(String(localized: "Sample rate"))
                 if isPicker {
                     SampleRatePickerValue(
                         currentDisplay: display,
@@ -46,12 +46,12 @@ struct DeviceInspectorInfoGrid: View {
             }
         case .format(let value):
             GridRow {
-                labelCell("Format")
+                labelCell(String(localized: "Format"))
                 valueCell(value)
             }
         case .deviceID(let uid):
             GridRow {
-                labelCell("Device ID")
+                labelCell(String(localized: "Device ID"))
                 DeviceIDValueCell(uid: uid)
                     .gridColumnAlignment(.trailing)
                     .frame(maxWidth: .infinity, alignment: .trailing)
@@ -106,7 +106,7 @@ private struct SampleRatePickerValue: View {
         .overlay(pickerBorder)
         .onHover { isHovered = $0 }
         .animation(DesignTokens.Animation.hover, value: isHovered)
-        .accessibilityLabel("Sample rate: \(currentDisplay). Activate to change.")
+        .accessibilityLabel(String(localized: "Sample rate: \(currentDisplay). Activate to change."))
     }
 
     private var pickerLabel: some View {
@@ -166,8 +166,8 @@ private struct DeviceIDValueCell: View {
                     .contentShape(Rectangle())
             }
             .buttonStyle(.plain)
-            .help(copied ? "Copied" : "Copy device ID")
-            .accessibilityLabel(copied ? "Device ID copied" : "Copy device ID")
+            .help(copied ? String(localized: "Copied") : String(localized: "Copy device ID"))
+            .accessibilityLabel(copied ? String(localized: "Device ID copied") : String(localized: "Copy device ID"))
         }
         .accessibilityElement(children: .contain)
     }

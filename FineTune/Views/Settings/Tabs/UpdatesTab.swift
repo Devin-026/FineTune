@@ -10,9 +10,9 @@ struct UpdatesTab: View {
         if let date = updateManager.lastUpdateCheckDate {
             let formatter = RelativeDateTimeFormatter()
             formatter.unitsStyle = .abbreviated
-            return "Version \(version) · \(formatter.localizedString(for: date, relativeTo: .now))"
+            return String(localized: "Version \(version) · \(formatter.localizedString(for: date, relativeTo: .now))")
         }
-        return "Version \(version) · Never checked"
+        return String(localized: "Version \(version) · Never checked")
     }
 
     private var automaticallyChecksBinding: Binding<Bool> {
@@ -25,10 +25,21 @@ struct UpdatesTab: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 24) {
-                SettingsSection("Software Updates") {
+                if updateManager.usesCommunityReleases {
+                    SettingsSection(String(localized: "Chinese edition releases")) {
+                        SettingsRow(
+                            String(localized: "Chinese Community Edition"),
+                            description: String(localized: "Download updates from this fork. Upstream automatic updates are disabled to keep the Chinese edition installed.")
+                        ) {
+                            Link(String(localized: "Open Releases"), destination: URL(string: "https://github.com/Devin-026/FineTune/releases")!)
+                                .buttonStyle(.bordered)
+                        }
+                    }
+                } else {
+                SettingsSection(String(localized: "Software Updates")) {
                     SettingsRow(
-                        "Automatic updates",
-                        description: "Check for new versions automatically"
+                        String(localized: "Automatic updates"),
+                        description: String(localized: "Check for new versions automatically")
                     ) {
                         Toggle("", isOn: automaticallyChecksBinding)
                             .toggleStyle(.switch)
@@ -37,15 +48,16 @@ struct UpdatesTab: View {
                     }
                     SettingsRowDivider()
                     SettingsRow(
-                        "Last checked",
+                        String(localized: "Last checked"),
                         description: lastCheckDescription
                     ) {
-                        Button("Check Now") {
+                        Button(String(localized: "Check Now")) {
                             updateManager.checkForUpdates()
                         }
                         .buttonStyle(.bordered)
                         .controlSize(.small)
                     }
+                }
                 }
             }
             .padding(.horizontal, 20)

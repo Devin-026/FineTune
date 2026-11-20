@@ -95,7 +95,7 @@ struct AutoEQSearchPanel: View {
     private var cardProfileInfo: (name: String, source: String?)? {
         guard let selectedID = selectedProfileID else { return nil }
         if let profile = profileManager.profile(for: selectedID) {
-            let source = profile.source == .imported ? "Imported" : profile.measuredBy
+            let source = profile.source == .imported ? String(localized: "Imported") : profile.measuredBy
             return (profile.name, source)
         } else if let entry = profileManager.catalogEntry(for: selectedID) {
             return (entry.name, entry.measuredBy)
@@ -189,11 +189,11 @@ struct AutoEQSearchPanel: View {
                 .font(.system(size: 20))
                 .foregroundStyle(DesignTokens.Colors.autoEQEmptyIcon)
 
-            Text("No correction active")
+            Text(String(localized: "No correction active"))
                 .font(.system(size: 11, weight: .medium))
                 .foregroundStyle(DesignTokens.Colors.textTertiary)
 
-            Text("Search or pick a favorite below")
+            Text(String(localized: "Search or pick a favorite below"))
                 .font(.system(size: 9))
                 .foregroundStyle(DesignTokens.Colors.textQuaternary)
         }
@@ -209,7 +209,7 @@ struct AutoEQSearchPanel: View {
         )
         .padding(DesignTokens.Spacing.sm)
         .accessibilityElement(children: .combine)
-        .accessibilityLabel("No correction active. Search or pick a favorite below.")
+        .accessibilityLabel(String(localized: "No correction active. Search or pick a favorite below."))
     }
 
     // MARK: - Loading Placeholder
@@ -218,7 +218,7 @@ struct AutoEQSearchPanel: View {
         HStack(spacing: DesignTokens.Spacing.sm) {
             ProgressView()
                 .controlSize(.small)
-            Text("Loading profile...")
+            Text(String(localized: "Loading profile..."))
                 .font(.system(size: 11))
                 .foregroundStyle(DesignTokens.Colors.textTertiary)
         }
@@ -280,7 +280,7 @@ struct AutoEQSearchPanel: View {
                     .buttonStyle(.plain)
                     .onHover { starHoveredID = $0 ? id : nil }
                     .animation(DesignTokens.Animation.hover, value: isStarHovered)
-                    .accessibilityLabel(isFavorited ? "Remove from favorites" : "Add to favorites")
+                    .accessibilityLabel(isFavorited ? String(localized: "Remove from favorites") : String(localized: "Add to favorites"))
 
                     // Remove button
                     Button {
@@ -298,20 +298,20 @@ struct AutoEQSearchPanel: View {
                     }
                     .buttonStyle(.plain)
                     .whenHovered { hoveredID = $0 ? "_remove" : nil }
-                    .accessibilityLabel("Remove correction profile")
-                    .accessibilityHint("Returns to no correction state")
+                    .accessibilityLabel(String(localized: "Remove correction profile"))
+                    .accessibilityHint(String(localized: "Returns to no correction state"))
                 }
             }
 
             // Mini toggle switches
             HStack(spacing: 10) {
                 miniToggle(
-                    label: "Correction",
+                    label: String(localized: "Correction"),
                     isOn: isCorrectionEnabled
                 ) { onCorrectionToggle?(!isCorrectionEnabled) }
 
                 miniToggle(
-                    label: "Preamp",
+                    label: String(localized: "Preamp"),
                     isOn: preampEnabled
                 ) { onPreampToggle?() }
 
@@ -322,7 +322,7 @@ struct AutoEQSearchPanel: View {
         .padding(.vertical, DesignTokens.Spacing.sm)
         .animation(.easeInOut(duration: 0.15), value: isCorrectionEnabled)
         .accessibilityElement(children: .contain)
-        .accessibilityLabel("\(name) correction profile")
+        .accessibilityLabel(String(localized: "\(name) correction profile"))
     }
 
     // MARK: - Mini Toggle
@@ -348,7 +348,7 @@ struct AutoEQSearchPanel: View {
         }
         .accessibilityElement(children: .combine)
         .accessibilityLabel(label)
-        .accessibilityValue(isOn ? "On" : "Off")
+        .accessibilityValue(isOn ? String(localized: "On") : String(localized: "Off"))
     }
 
     // MARK: - Search Field
@@ -359,15 +359,15 @@ struct AutoEQSearchPanel: View {
                 .font(.system(size: 12))
                 .foregroundStyle(DesignTokens.Colors.textTertiary)
 
-            TextField("Search headphones...", text: $searchText)
+            TextField(String(localized: "Search headphones..."), text: $searchText)
                 .textFieldStyle(.plain)
                 .font(.system(size: 12))
                 .foregroundStyle(DesignTokens.Colors.textPrimary)
                 .focused($isSearchFocused)
-                .accessibilityLabel("Search headphones")
+                .accessibilityLabel(String(localized: "Search headphones"))
 
             if !searchText.isEmpty {
-                Button("Clear search", systemImage: "xmark.circle.fill") {
+                Button(String(localized: "Clear search"), systemImage: "xmark.circle.fill") {
                     searchText = ""
                 }
                 .labelStyle(.iconOnly)
@@ -388,7 +388,7 @@ struct AutoEQSearchPanel: View {
             HStack(spacing: DesignTokens.Spacing.sm) {
                 ProgressView()
                     .controlSize(.small)
-                Text("Loading headphone catalog...")
+                Text(String(localized: "Loading headphone catalog..."))
                     .font(.system(size: 11))
                     .foregroundStyle(DesignTokens.Colors.textTertiary)
             }
@@ -396,7 +396,7 @@ struct AutoEQSearchPanel: View {
         } else if debouncedQuery.isEmpty {
             let favorites = resolvedFavorites
             if favorites.isEmpty {
-                Text("Type to search headphones")
+                Text(String(localized: "Type to search headphones"))
                     .font(.system(size: 11))
                     .foregroundStyle(DesignTokens.Colors.textTertiary)
                     .frame(maxWidth: .infinity, minHeight: listHeight)
@@ -404,7 +404,7 @@ struct AutoEQSearchPanel: View {
                 ScrollViewReader { proxy in
                     ScrollView {
                         LazyVStack(spacing: 2) {
-                            Text("FAVORITES")
+                            Text(String(localized: "FAVORITES"))
                                 .font(.system(size: 9, weight: .bold))
                                 .foregroundStyle(DesignTokens.Colors.textTertiary)
                                 .tracking(1.0)
@@ -427,7 +427,7 @@ struct AutoEQSearchPanel: View {
                 }
             }
         } else if results.isEmpty {
-            Text("No profiles found")
+            Text(String(localized: "No profiles found"))
                 .font(.system(size: 11))
                 .foregroundStyle(DesignTokens.Colors.textTertiary)
                 .frame(maxWidth: .infinity, minHeight: listHeight)
@@ -487,7 +487,7 @@ struct AutoEQSearchPanel: View {
             HStack {
                 Image(systemName: "square.and.arrow.down")
                     .font(.system(size: 10))
-                Text("Import ParametricEQ.txt...")
+                Text(String(localized: "Import ParametricEQ.txt..."))
                     .font(.system(size: 11))
             }
             .foregroundStyle(DesignTokens.Colors.textSecondary)
@@ -501,8 +501,8 @@ struct AutoEQSearchPanel: View {
         }
         .buttonStyle(.plain)
         .whenHovered { hoveredID = $0 ? "_import" : nil }
-        .accessibilityLabel("Import custom profile")
-        .accessibilityHint("Opens file picker for ParametricEQ.txt files")
+        .accessibilityLabel(String(localized: "Import custom profile"))
+        .accessibilityHint(String(localized: "Opens file picker for ParametricEQ.txt files"))
         .padding(.horizontal, DesignTokens.Spacing.xs)
         .padding(.bottom, DesignTokens.Spacing.xs)
     }
@@ -529,13 +529,13 @@ struct AutoEQSearchPanel: View {
         let total = cachedSearchResult.totalCount
         let shown = cachedSearchResult.entries.count
         if total > shown {
-            Text("Showing \(shown) of \(total) results")
+            Text(String(localized: "Showing \(shown) of \(total) results"))
                 .font(.system(size: 9))
                 .foregroundStyle(DesignTokens.Colors.textTertiary)
                 .frame(maxWidth: .infinity, alignment: .center)
                 .padding(.vertical, DesignTokens.Spacing.xxs)
         } else if total > 0 {
-            Text("\(total) results")
+            Text(String(localized: "\(total) results"))
                 .font(.system(size: 9))
                 .foregroundStyle(DesignTokens.Colors.textTertiary)
                 .frame(maxWidth: .infinity, alignment: .center)
@@ -605,7 +605,7 @@ struct AutoEQSearchPanel: View {
         .accessibilityElement(children: .combine)
         .accessibilityLabel(entry.name)
         .accessibilityAddTraits(isSelected ? .isSelected : [])
-        .accessibilityHint("Apply this correction profile")
+        .accessibilityHint(String(localized: "Apply this correction profile"))
     }
 
     // MARK: - Star Button (browse zone rows)
@@ -634,7 +634,7 @@ struct AutoEQSearchPanel: View {
             .buttonStyle(.plain)
             .onHover { starHoveredID = $0 ? id : nil }
             .animation(DesignTokens.Animation.hover, value: isStarHovered)
-            .accessibilityLabel(isFavorited ? "Remove from favorites" : "Add to favorites")
+            .accessibilityLabel(isFavorited ? String(localized: "Remove from favorites") : String(localized: "Add to favorites"))
         }
     }
 
@@ -650,7 +650,7 @@ struct AutoEQSearchPanel: View {
                 onSelect(profile)
                 onDismiss()
             } else {
-                fetchError = "Failed to load \(entry.name)"
+                fetchError = String(localized: "Failed to load \(entry.name)")
                 Task {
                     try? await Task.sleep(for: .seconds(3))
                     if fetchError != nil { fetchError = nil }

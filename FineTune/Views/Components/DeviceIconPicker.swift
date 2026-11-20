@@ -28,9 +28,9 @@ struct DeviceIconPicker: View {
             ScrollView {
                 VStack(alignment: .leading, spacing: DesignTokens.Spacing.sm) {
                     if trimmedQuery.isEmpty {
-                        gridSection(title: "Suggested", symbols: suggestedSymbols, highlighted: highlighted)
+                        gridSection(title: String(localized: "Suggested"), symbols: suggestedSymbols, highlighted: highlighted)
                         ForEach(DeviceIconCatalog.categories) { category in
-                            gridSection(title: category.name, symbols: category.entries.map(\.symbol), highlighted: highlighted)
+                            gridSection(title: category.displayName, symbols: category.entries.map(\.symbol), highlighted: highlighted)
                         }
                     } else {
                         searchResults(highlighted: highlighted)
@@ -40,7 +40,7 @@ struct DeviceIconPicker: View {
             .frame(height: 300)
             .scrollIndicators(.never)
 
-            Button("Restore Default") {
+            Button(String(localized: "Restore Default")) {
                 onSelect(nil)
             }
             .controlSize(.small)
@@ -70,7 +70,7 @@ struct DeviceIconPicker: View {
     private func searchResults(highlighted: String?) -> some View {
         let hits = DeviceIconCatalog.matching(trimmedQuery).map(\.symbol)
         if hits.isEmpty {
-            Text("No matching icons")
+            Text(String(localized: "No matching icons"))
                 .font(DesignTokens.Typography.caption)
                 .foregroundStyle(DesignTokens.Colors.textTertiary)
                 .frame(maxWidth: .infinity, alignment: .center)
@@ -104,7 +104,7 @@ struct DeviceIconPicker: View {
             Image(systemName: "magnifyingglass")
                 .font(.system(size: 11))
                 .foregroundStyle(DesignTokens.Colors.textTertiary)
-            TextField("Search icons", text: $query)
+            TextField(String(localized: "Search icons"), text: $query)
                 .textFieldStyle(.plain)
                 .font(.system(size: 12))
         }

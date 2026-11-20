@@ -28,7 +28,7 @@ struct SettingsRootView: View {
                     deviceVolumeMonitor.setSystemFollowDefault()
                 }
             )
-            .tabItem { Label("General", systemImage: "gearshape") }
+            .tabItem { Label(String(localized: "General"), systemImage: "gearshape") }
             .tag(Section.general)
 
             AudioTab(
@@ -36,7 +36,7 @@ struct SettingsRootView: View {
                 audioEngine: audioEngine,
                 deviceVolumeMonitor: deviceVolumeMonitor
             )
-            .tabItem { Label("Audio", systemImage: "speaker.wave.2") }
+            .tabItem { Label(String(localized: "Audio"), systemImage: "speaker.wave.2") }
             .tag(Section.audio)
 
             ShortcutsTab(
@@ -46,20 +46,20 @@ struct SettingsRootView: View {
                 mediaKeyMonitor: mediaKeyMonitor,
                 shortcutsRegistry: shortcutsRegistry
             )
-            .tabItem { Label("Shortcuts", systemImage: "command") }
+            .tabItem { Label(String(localized: "Shortcuts"), systemImage: "command") }
             .tag(Section.shortcuts)
 
             UpdatesTab(updateManager: updateManager)
-                .tabItem { Label("Updates", systemImage: "arrow.triangle.2.circlepath") }
+                .tabItem { Label(String(localized: "Updates"), systemImage: "arrow.triangle.2.circlepath") }
                 .tag(Section.updates)
 
             AboutTab()
-                .tabItem { Label("About", systemImage: "info.circle") }
+                .tabItem { Label(String(localized: "About"), systemImage: "info.circle") }
                 .tag(Section.about)
         }
         .frame(width: 720, height: 560)
         .preferredColorScheme(settings.appSettings.appearance.swiftUIColorScheme)
         .background(WindowAppearanceBridge(appearance: settings.appSettings.appearance.nsAppearance))
-        .background(WindowTitleBridge(title: "FineTune Settings"))
+        .background(WindowTitleBridge(title: String(localized: "FineTune Settings")))
     }
 }

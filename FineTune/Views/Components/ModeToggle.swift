@@ -8,8 +8,8 @@ struct ModeToggle: View {
     @State private var hoveredOption: DeviceSelectionMode?
 
     private let options: [(mode: DeviceSelectionMode, label: String)] = [
-        (.single, "Single"),
-        (.multi, "Multi")
+        (.single, String(localized: "Single")),
+        (.multi, String(localized: "Multi"))
     ]
 
     var body: some View {

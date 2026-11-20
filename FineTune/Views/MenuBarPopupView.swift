@@ -111,7 +111,7 @@ struct MenuBarPopupView: View {
                 deviceTabsHeader
                 Spacer()
                 if isEditingDevicePriority {
-                    Text("Drag or type a number to set priority")
+                    Text(String(localized: "Drag or type a number to set priority"))
                         .font(.system(size: 11))
                         .foregroundStyle(DesignTokens.Colors.textSecondary)
                 } else {
@@ -257,7 +257,7 @@ struct MenuBarPopupView: View {
 
     /// Edit priority button — pencil ↔ checkmark, styled to match settingsButton
     private var editPriorityButton: some View {
-        Button(isEditingDevicePriority ? "Done reordering" : "Reorder devices",
+        Button(isEditingDevicePriority ? String(localized: "Done reordering") : String(localized: "Reorder devices"),
                systemImage: isEditingDevicePriority ? "checkmark" : "pencil") {
             toggleDevicePriorityEdit()
         }
@@ -272,13 +272,13 @@ struct MenuBarPopupView: View {
         )
         .contentShape(Rectangle())
         .animation(.spring(response: 0.3, dampingFraction: 0.75), value: isEditingDevicePriority)
-        .help(isEditingDevicePriority ? "Done reordering" : "Reorder devices")
+        .help(isEditingDevicePriority ? String(localized: "Done reordering") : String(localized: "Reorder devices"))
     }
 
     // MARK: - Settings Button
 
     private var settingsButton: some View {
-        Button("Settings", systemImage: "gearshape.fill") {
+        Button(String(localized: "Settings"), systemImage: "gearshape.fill") {
             openSettingsWindow()
         }
         .labelStyle(.iconOnly)
@@ -350,7 +350,7 @@ struct MenuBarPopupView: View {
                 Button {
                     NSWorkspace.shared.open(DesignTokens.Links.support)
                 } label: {
-                    Label("Donate", systemImage: isSupportHovered ? "heart.fill" : "heart")
+                    Label(String(localized: "Donate"), systemImage: isSupportHovered ? "heart.fill" : "heart")
                 }
                 .buttonStyle(.plain)
                 .font(.system(size: 12, weight: .medium))
@@ -360,8 +360,8 @@ struct MenuBarPopupView: View {
                         isSupportHovered = hovering
                     }
                 }
-                .accessibilityLabel("Donate to FineTune")
-                .help("Donate to FineTune")
+                .accessibilityLabel(String(localized: "Donate to FineTune"))
+                .help(String(localized: "Donate to FineTune"))
 
                 Spacer()
 
@@ -369,7 +369,7 @@ struct MenuBarPopupView: View {
                     NSApplication.shared.terminate(nil)
                 } label: {
                     HStack(spacing: 6) {
-                        Text("Quit")
+                        Text(String(localized: "Quit"))
                         Text("⌘Q")
                             .foregroundStyle(DesignTokens.Colors.textTertiary)
                     }
@@ -378,8 +378,8 @@ struct MenuBarPopupView: View {
                 .font(DesignTokens.Typography.caption)
                 .foregroundStyle(DesignTokens.Colors.textSecondary)
                 .glassButtonStyle()
-                .accessibilityLabel("Quit FineTune")
-                .help("Quit FineTune (⌘Q)")
+                .accessibilityLabel(String(localized: "Quit FineTune"))
+                .help(String(localized: "Quit FineTune (⌘Q)"))
             }
         }
     }
@@ -390,7 +390,7 @@ struct MenuBarPopupView: View {
     private var defaultOutputDeviceName: String {
         guard let uid = deviceVolumeMonitor.defaultDeviceUID,
               let device = sortedDevices.first(where: { $0.uid == uid }) else {
-            return "No Output"
+            return String(localized: "No Output")
         }
         return device.name
     }
@@ -399,7 +399,7 @@ struct MenuBarPopupView: View {
     private var defaultInputDeviceName: String {
         guard let uid = deviceVolumeMonitor.defaultInputDeviceUID,
               let device = sortedInputDevices.first(where: { $0.uid == uid }) else {
-            return "No Input"
+            return String(localized: "No Input")
         }
         return device.name
     }
@@ -461,7 +461,7 @@ struct MenuBarPopupView: View {
                     .contentShape(Rectangle())
             }
             .buttonStyle(.plain)
-            .help("Output Devices")
+            .help(String(localized: "Output Devices"))
 
             // Input (mic) button
             Button {
@@ -484,7 +484,7 @@ struct MenuBarPopupView: View {
                     .contentShape(Rectangle())
             }
             .buttonStyle(.plain)
-            .help("Input Devices")
+            .help(String(localized: "Input Devices"))
         }
         .padding(3)
         .background(
@@ -518,7 +518,7 @@ struct MenuBarPopupView: View {
                 // Paired Bluetooth devices (output tab only)
                 if !showingInputDevices {
                     if !isBluetoothOn {
-                        Text("Turn on Bluetooth to connect devices")
+                        Text(String(localized: "Turn on Bluetooth to connect devices"))
                             .font(.caption)
                             .foregroundStyle(.secondary)
                             .padding(.top, DesignTokens.Spacing.xs)
@@ -528,7 +528,7 @@ struct MenuBarPopupView: View {
                         let connectedNames = Set(editableDeviceOrder.map(\.name))
                         let filteredPaired = pairedDevices.filter { !connectedNames.contains($0.name) }
                         if !filteredPaired.isEmpty {
-                            SectionHeader(title: "Paired")
+                            SectionHeader(title: String(localized: "Paired"))
                                 .frame(maxWidth: .infinity, alignment: .leading)
                                 .padding(.top, DesignTokens.Spacing.xs)
 
@@ -722,13 +722,13 @@ struct MenuBarPopupView: View {
                 Image(systemName: "speaker.slash")
                     .font(.title)
                     .foregroundStyle(DesignTokens.Colors.textTertiary)
-                Text("No apps playing audio")
+                Text(String(localized: "No apps playing audio"))
                     .font(.callout)
                     .foregroundStyle(DesignTokens.Colors.textSecondary)
 
                 let ignoredCount = audioEngine.settingsManager.getIgnoredAppInfo().count
                 if ignoredCount > 0 {
-                    Text("\(ignoredCount) ignored · edit to manage")
+                    Text(String(localized: "\(ignoredCount) ignored · edit to manage"))
                         .font(DesignTokens.Typography.caption)
                         .foregroundStyle(DesignTokens.Colors.textTertiary)
                 }
@@ -741,11 +741,11 @@ struct MenuBarPopupView: View {
     @ViewBuilder
     private func appsSection(scrollProxy: ScrollViewProxy) -> some View {
         HStack {
-            SectionHeader(title: "Apps")
+            SectionHeader(title: String(localized: "Apps"))
             Spacer()
             let ignoredCount = audioEngine.settingsManager.getIgnoredAppInfo().count
             if ignoredCount > 0 && !isEditingDevicePriority {
-                Text("\(ignoredCount) ignored")
+                Text(String(localized: "\(ignoredCount) ignored"))
                     .font(DesignTokens.Typography.caption)
                     .foregroundStyle(DesignTokens.Colors.textTertiary)
             }
@@ -820,7 +820,7 @@ struct MenuBarPopupView: View {
                 Divider()
                     .padding(.vertical, DesignTokens.Spacing.xs)
 
-                Text("Ignored")
+                Text(String(localized: "Ignored"))
                     .sectionHeaderStyle()
                     .padding(.bottom, DesignTokens.Spacing.xs)
 
@@ -1169,7 +1169,7 @@ struct MenuBarPopupView: View {
         panel.allowedContentTypes = [UTType.plainText]
         panel.allowsMultipleSelection = false
         panel.canChooseDirectories = false
-        panel.message = "Select an AutoEQ ParametricEQ.txt file"
+        panel.message = String(localized: "Select an AutoEQ ParametricEQ.txt file")
         panel.begin { response in
             guard response == .OK, let url = panel.url else { return }
             let name = url.deletingPathExtension().lastPathComponent
@@ -1178,7 +1178,7 @@ struct MenuBarPopupView: View {
                     audioEngine.setAutoEQProfile(for: deviceUID, profileID: profile.id)
                     autoEQImportError = nil
                 } else {
-                    autoEQImportError = "Could not read profile — check file format"
+                    autoEQImportError = String(localized: "Could not read profile — check file format")
                     importErrorClearTask?.cancel()
                     importErrorClearTask = Task {
                         try? await Task.sleep(for: .seconds(3))
